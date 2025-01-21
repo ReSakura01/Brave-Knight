@@ -7,6 +7,9 @@ public class PlayerState
     protected PlayerStateMachine stateMachine;
     protected Player player;
 
+    protected Rigidbody2D rb;
+
+    protected float xInput;
     private string animBoolName;
 
     public PlayerState(PlayerStateMachine stateMachine, Player player, string animBoolName)
@@ -19,11 +22,13 @@ public class PlayerState
     public virtual void Enter()
     {
         player.anim.SetBool(animBoolName, true);
+        rb = player.rb;
     }
 
     public virtual void Update()
     {
-        Debug.Log("I'm in " + this.animBoolName);
+        xInput = Input.GetAxisRaw("Horizontal");
+        player.anim.SetFloat("y_Velocity", rb.velocity.y);
     }
 
     public virtual void Exit()

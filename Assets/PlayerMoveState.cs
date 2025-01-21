@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveState : PlayerState
+public class PlayerMoveState : PlayerGroundedState
 {
     public PlayerMoveState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(stateMachine, player, animBoolName)
     {
@@ -22,7 +22,9 @@ public class PlayerMoveState : PlayerState
     {
         base.Update();
 
-        if (!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D))
+        player.SetVelocity(xInput, rb.velocity.y);
+
+        if (xInput == 0)
         {
             stateMachine.ChangeState(player.idleState);
         }

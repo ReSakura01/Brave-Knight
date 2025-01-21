@@ -2,11 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : PlayerGroundedState
+public class PlayerAirState : PlayerState
 {
-    public PlayerIdleState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(stateMachine, player, animBoolName)
+    public PlayerAirState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(stateMachine, player, animBoolName)
     {
-
     }
 
     public override void Enter()
@@ -23,9 +22,9 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Update();
 
-        if (xInput != 0)
+        if (rb.velocity.y == 0)
         {
-            stateMachine.ChangeState(player.moveState);
+            stateMachine.ChangeState(player.idleState);
         }
     }
 }

@@ -2,16 +2,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerIdleState : PlayerGroundedState
+public class PlayerJumpState : PlayerState
 {
-    public PlayerIdleState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(stateMachine, player, animBoolName)
+    public PlayerJumpState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(stateMachine, player, animBoolName)
     {
-
     }
 
     public override void Enter()
     {
         base.Enter();
+
+        player.SetVelocity(rb.velocity.x, player.jumpForce);
     }
 
     public override void Exit()
@@ -23,9 +24,9 @@ public class PlayerIdleState : PlayerGroundedState
     {
         base.Update();
 
-        if (xInput != 0)
+        if (rb.velocity.y < 0)
         {
-            stateMachine.ChangeState(player.moveState);
+            stateMachine.ChangeState(player.airState);
         }
     }
 }
