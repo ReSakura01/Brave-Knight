@@ -22,9 +22,10 @@ public class PlayerGroundedState : PlayerState
     {
         base.Update();
 
-        if (Input.GetKeyDown(KeyCode.K))
-        {
+        if (!player.IsGroundDetected())
+            stateMachine.ChangeState(player.airState);
+
+        if (Input.GetKeyDown(KeyCode.K) && player.IsGroundDetected() && !player.isDashing)
             stateMachine.ChangeState(player.jumpState);
-        }
     }
 }
