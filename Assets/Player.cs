@@ -14,6 +14,9 @@ public class Player : MonoBehaviour
     public float dashDuration;
     public float dashDir = -1;
 
+    [Header("WallSlide info")]
+    public float wallSlideForce;
+
     [Header("Collision info")]
     [SerializeField] private Transform groundCheck;
     [SerializeField] private float groundCheckDistance;
@@ -34,8 +37,9 @@ public class Player : MonoBehaviour
     public PlayerStateMachine stateMachine { get; private set; }
     public PlayerIdleState idleState { get; private set; }
     public PlayerMoveState moveState { get; private set; }
-    public PlayerAirState airState { get; private set; }
+    public PlayerFallState fallState { get; private set; }
     public PlayerJumpState jumpState { get; private set; }
+    public PlayerWallSlideState wallSlideState { get; private set; }
     public PlayerDashState dashState { get; private set; }
     #endregion
 
@@ -45,9 +49,10 @@ public class Player : MonoBehaviour
 
         idleState = new PlayerIdleState(stateMachine, this, "Idle");
         moveState = new PlayerMoveState(stateMachine, this, "Move");
-        airState  = new PlayerAirState (stateMachine, this, "Jump");
+        fallState  = new PlayerFallState (stateMachine, this, "Jump");
         jumpState = new PlayerJumpState(stateMachine, this, "Jump");
         dashState = new PlayerDashState(stateMachine, this, "Dash");
+        wallSlideState = new PlayerWallSlideState(stateMachine, this, "WallSlide");
     }
 
     private void Start()
@@ -85,6 +90,7 @@ public class Player : MonoBehaviour
     }
 
     public bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
+    public bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
 
     private void OnDrawGizmos()
     {

@@ -23,7 +23,7 @@ public class PlayerGroundedState : PlayerState
         base.Update();
 
         if (!player.IsGroundDetected())
-            stateMachine.ChangeState(player.airState);
+            stateMachine.ChangeState(player.fallState);
 
         if (Input.GetKeyDown(KeyCode.K) && player.IsGroundDetected() && !player.isDashing)
             stateMachine.ChangeState(player.jumpState);
