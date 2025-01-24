@@ -22,10 +22,12 @@ public class PlayerAirState : PlayerState
     {
         base.Update();
 
+        player.FlipController(rb.velocity.x);
+
         if (xInput != 0)
             player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
 
-        if (player.IsWallDetected())
+        if (player.IsWallDetected() && !player.fromWall)
             stateMachine.ChangeState(player.wallSlideState);
 
     }

@@ -24,8 +24,9 @@ public class PlayerState
 
     public virtual void Enter()
     {
-        player.anim.SetBool(animBoolName, true);
         rb = player.rb;
+
+        player.anim.SetBool(animBoolName, true);
     }
 
     public virtual void Update()
@@ -37,7 +38,6 @@ public class PlayerState
 
         player.anim.SetFloat("y_Velocity", rb.velocity.y);
 
-        player.FlipController(rb.velocity.x);
     }
 
     public virtual void Exit()

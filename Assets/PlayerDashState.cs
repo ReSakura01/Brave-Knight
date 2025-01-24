@@ -19,7 +19,8 @@ public class PlayerDashState : PlayerState
     public override void Exit()
     {
         base.Exit();
-
+        player.fromWall = false;
+        player.isDashing = false;
         player.SetVelocity(0, rb.velocity.y);
     }
 
@@ -27,12 +28,14 @@ public class PlayerDashState : PlayerState
     {
         base.Update();
 
+        player.FlipController(rb.velocity.x);
+
         player.SetVelocity(player.dashSpeed * player.dashDir, 0);
 
+        if (player.IsWallDetected() && !player.fromWall)
+            stateMachine.ChangeState(player.wallSlideState);
+
         if (stateTimer < 0)
-        {
-            player.isDashing = false;
             stateMachine.ChangeState(player.idleState);
-        }
     }
 }

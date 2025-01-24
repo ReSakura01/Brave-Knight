@@ -22,6 +22,8 @@ public class PlayerGroundedState : PlayerState
     {
         base.Update();
 
+        player.FlipController(rb.velocity.x);
+
         if (!player.IsGroundDetected())
             stateMachine.ChangeState(player.fallState);
 

@@ -26,6 +26,7 @@ public class Player : MonoBehaviour
 
     public float facingDir { get; private set; } = -1;
     public bool facingRight = false;
+    public bool fromWall = false;
 
     #region Component
     public Animator anim { get; private set; }
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
     public PlayerJumpState jumpState { get; private set; }
     public PlayerWallSlideState wallSlideState { get; private set; }
     public PlayerDashState dashState { get; private set; }
+    public PlayerWallJumpState wallJumpState { get; private set; }
     #endregion
 
     public void Awake()
@@ -53,6 +55,7 @@ public class Player : MonoBehaviour
         jumpState = new PlayerJumpState(stateMachine, this, "Jump");
         dashState = new PlayerDashState(stateMachine, this, "Dash");
         wallSlideState = new PlayerWallSlideState(stateMachine, this, "WallSlide");
+        wallJumpState = new PlayerWallJumpState(stateMachine, this, "DoubleJump");
     }
 
     private void Start()
@@ -79,6 +82,12 @@ public class Player : MonoBehaviour
 
             if (dashDir == 0)
                 dashDir = facingDir;
+
+            if (IsWallDetected())
+            {
+                fromWall = true;
+                dashDir = -facingDir;
+            }
 
             stateMachine.ChangeState(dashState);
         }

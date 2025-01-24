@@ -23,9 +23,6 @@ public class PlayerFallState : PlayerAirState
         base.Update();
 
         if (player.IsGroundDetected())
-        {
-            player.SetVelocity(0, 0);
             stateMachine.ChangeState(player.idleState);
-        }
     }
 }
