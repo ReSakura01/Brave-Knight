@@ -24,6 +24,9 @@ public class PlayerGroundedState : PlayerState
 
         player.FlipController(rb.velocity.x);
 
+        if (Input.GetKeyDown(KeyCode.J))
+            stateMachine.ChangeState(player.primaryAttackState);
+
         if (!player.IsGroundDetected())
             stateMachine.ChangeState(player.fallState);
 
