@@ -12,12 +12,14 @@ public class PlayerWallJumpState : PlayerAirState
     {
         base.Enter();
 
+        player.StartCoroutine("BusyFor", .2f);
         player.SetVelocity(player.moveSpeed * -player.facingDir, player.jumpForce);
     }
 
     public override void Exit()
     {
         base.Exit();
+
         player.fromWall = false;
     }
 

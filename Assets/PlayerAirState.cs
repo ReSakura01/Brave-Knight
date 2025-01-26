@@ -24,7 +24,7 @@ public class PlayerAirState : PlayerState
 
         player.FlipController(rb.velocity.x);
 
-        if (xInput != 0)
+        if (xInput != 0 && !player.isBusy)
             player.SetVelocity(xInput * player.moveSpeed, rb.velocity.y);
 
         if (player.IsWallDetected() && !player.fromWall)
