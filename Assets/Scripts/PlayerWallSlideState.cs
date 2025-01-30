@@ -26,7 +26,7 @@ public class PlayerWallSlideState : PlayerState
 
         player.SetVelocity(0, player.wallSlideForce);
 
-        if (xInput != 0 && player.facingDir != xInput || player.IsGroundDetected())
+        if (xInput != 0 && player.facingDir != xInput || player.IsGroundDetected() || !player.IsWallDetected())
             stateMachine.ChangeState(player.idleState);
 
         if (Input.GetKeyDown(KeyCode.K))
