@@ -166,6 +166,7 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 2
   idleTime: 1
+  attackDistance: 0.66
 --- !u!4 &242672290
 Transform:
   m_ObjectHideFlags: 0
@@ -2136,8 +2137,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1082446289}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6291, y: -1.37, z: 0}
-  m_LocalScale: {x: 13.8, y: 0.65, z: 1}
+  m_LocalPosition: {x: 0.5778, y: -1.37, z: 0}
+  m_LocalScale: {x: 13.902336, y: 0.65, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 521953913}
@@ -2450,6 +2451,7 @@ MonoBehaviour:
     m_Bits: 64
   moveSpeed: 1.5
   idleTime: 0
+  attackDistance: 0
 --- !u!50 &1630315016
 Rigidbody2D:
   serializedVersion: 4

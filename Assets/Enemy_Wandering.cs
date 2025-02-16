@@ -8,6 +8,8 @@ public class Enemy_Wandering : Enemy
     public WanderingIdleState idleState {  get; private set; }
     public WanderingMoveState moveState { get; private set; }
 
+    public WanderingBattleState battleState { get; private set; }
+
     #endregion
 
     protected override void Awake()
@@ -16,6 +18,7 @@ public class Enemy_Wandering : Enemy
 
         idleState = new WanderingIdleState(stateMachine, this, "Idle");
         moveState = new WanderingMoveState(stateMachine, this, "Move");
+        battleState = new WanderingBattleState(stateMachine, this, "Battle");
     }
 
     protected override void Start()

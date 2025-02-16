@@ -10,6 +10,9 @@ public class Enemy : Entity
     public float moveSpeed;
     public float idleTime;
 
+    [Header("Attack info")]
+    public float attackDistance;
+
     public EnemyStateMachine stateMachine { get; private set; }
 
     protected override void Awake()
@@ -26,4 +29,12 @@ public class Enemy : Entity
     }
 
     public virtual RaycastHit2D IsPlayerrDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, 50, whatIsPlayer);
+
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
+
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + attackDistance * facingDir, transform.position.y));
+    }
 }
