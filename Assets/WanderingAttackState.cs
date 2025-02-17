@@ -2,13 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class WanderingBattleState : EnemyState
+public class WanderingAttackState : EnemyState
 {
     private Transform player;
     private Enemy_Wandering enemy;
     private int moveDir;
 
-    public WanderingBattleState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName) : base(stateMachine, enemyBase, animBoolName)
+    public WanderingAttackState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName) : base(stateMachine, enemyBase, animBoolName)
     {
         enemy = enemyBase as Enemy_Wandering;
     }
@@ -34,11 +34,17 @@ public class WanderingBattleState : EnemyState
         }
 
         enemy.SetVelocity(3.5f * moveDir, rb.velocity.y);
+
+        if (triggerCalled)
+        {
+            stateMachine.ChangeState(enemy.idleState);
+        }
     }
 
     public override void Exit()
     {
         base.Exit();
+        enemy.lastTimeAttacked = Time.time;
     }
 
 }

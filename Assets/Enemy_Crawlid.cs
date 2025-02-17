@@ -30,6 +30,4 @@ public class Enemy_Crawlid : Enemy
     {
         base.Update();
     }
-
-    public virtual void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 }

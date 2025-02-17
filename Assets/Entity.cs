@@ -37,6 +37,11 @@ public class Entity : MonoBehaviour
 
     }
 
+    public virtual void Damage()
+    {
+
+    }
+
     public void SetVelocity(float _xVelocity, float _yVelocity)
     {
         rb.velocity = new Vector2(_xVelocity, _yVelocity);

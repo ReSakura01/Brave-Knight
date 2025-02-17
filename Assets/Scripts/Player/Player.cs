@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Player : Entity
 {
+    [Header("Attack details")]
+    public Transform attacckCheck;
+    public float attackCheckRadius;
     public bool isBusy { get; private set; }
 
     [Header("Move info")]
@@ -71,11 +74,8 @@ public class Player : Entity
     public IEnumerator BusyFor(float _seconds)
     {
         isBusy = true;
-
         yield return new WaitForSeconds(_seconds);
-
         isBusy = false;
-
     }
     
 
@@ -98,6 +98,10 @@ public class Player : Entity
         }
     }
 
+    protected override void OnDrawGizmos()
+    {
+        base.OnDrawGizmos();
 
-
+        Gizmos.DrawWireSphere(attacckCheck.position, attackCheckRadius);
+    }
 }
