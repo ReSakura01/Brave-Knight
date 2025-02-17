@@ -18,20 +18,20 @@ public class WanderingAttackState : EnemyState
         base.Enter();
 
         player = GameObject.Find("Blue").transform;
-    }
-    public override void Update()
-    {
-        base.Update();
 
         if (player.position.x > enemy.transform.position.x)
             moveDir = 1;
         else
             moveDir = -1;
-        
+
         if (moveDir != enemy.facingDir)
         {
             enemy.Flip();
         }
+    }
+    public override void Update()
+    {
+        base.Update();
 
         enemy.SetVelocity(3.5f * moveDir, rb.velocity.y);
 
