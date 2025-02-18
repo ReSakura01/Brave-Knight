@@ -21,4 +21,10 @@ public class PlayerAnimationTriggers : MonoBehaviour
                 hit.GetComponent<Enemy>().Damage();
         }
     }
+
+    private void OpenSlashEffect() => player.OpenSlashEffect();
+    private void CloseSlashEffect() => player.CloseSlashEffect();
+
+    private void OpenSlashEffectAlt() => player.OpenSlashEffectAlt();
+    private void CloseSlashEffectAlt() => player.CloseSlashEffectAlt();
 }

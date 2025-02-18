@@ -7,6 +7,8 @@ public class Player : Entity
     [Header("Attack details")]
     public Transform attacckCheck;
     public float attackCheckRadius;
+    public GameObject slashEffect1, slashEffect2, slashEffectAlt1;
+
     public bool isBusy { get; private set; }
 
     [Header("Move info")]
@@ -67,6 +69,28 @@ public class Player : Entity
         stateMachine.currentState.Update();
 
         CheckForDashInput();
+    }
+
+    public virtual void OpenSlashEffect()
+    {
+        slashEffect1.SetActive(true);
+        slashEffect2.SetActive(true);
+    }
+
+    public virtual void CloseSlashEffect()
+    {
+        slashEffect1.SetActive(false);
+        slashEffect2.SetActive(false);
+    }
+
+    public virtual void OpenSlashEffectAlt()
+    {
+        slashEffectAlt1.SetActive(true);
+    }
+
+    public virtual void CloseSlashEffectAlt()
+    {
+        slashEffectAlt1.SetActive(false);
     }
 
     public virtual void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
