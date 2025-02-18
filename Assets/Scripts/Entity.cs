@@ -10,6 +10,11 @@ public class Entity : MonoBehaviour
 
     #endregion
 
+    [Header("Knockback info")]
+    [SerializeField] protected Vector2 knockbackDirection;
+    [SerializeField] protected float knockbackDuration;
+    protected bool isKnocked;
+
     [Header("Collision info")]
     [SerializeField] protected Transform groundCheck;
     [SerializeField] protected float groundCheckDistance;
@@ -39,12 +44,17 @@ public class Entity : MonoBehaviour
 
     public virtual void Damage()
     {
+        StartCoroutine("HitKnockback");
 
     }
 
     public void SetVelocity(float _xVelocity, float _yVelocity)
     {
+        if (isKnocked)
+            return;
+
         rb.velocity = new Vector2(_xVelocity, _yVelocity);
+        // FlipController(_xVelocity);
     }
 
     #region Collision

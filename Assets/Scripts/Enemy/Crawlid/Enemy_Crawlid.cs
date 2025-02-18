@@ -10,7 +10,6 @@ public class Enemy_Crawlid : Enemy
     public CrawlidTrunState trunState { get; private set; }
     #endregion
 
-
     protected override void Awake()
     {
         base.Awake();

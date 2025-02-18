@@ -10,4 +10,7 @@ public class WanderingAnimationTrigger : MonoBehaviour
     {
         enemy.AnimationTrigger();
     }
+
+    private void OpenCounterWindow() => enemy.OpenCounterAttackWindow();
+    private void CloseCounterWindow() => enemy.CloseCounterAttackWindow();
 }

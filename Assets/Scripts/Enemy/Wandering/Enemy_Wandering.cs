@@ -11,7 +11,6 @@ public class Enemy_Wandering : Enemy
     public WanderingAttackState attackState { get; private set; }
 
     #endregion
-
     protected override void Awake()
     {
         base.Awake();
