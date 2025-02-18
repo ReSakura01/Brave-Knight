@@ -16,7 +16,7 @@ public class WanderingGroundedState : EnemyState
     {
         base.Enter();
 
-        player = GameObject.Find("Blue").transform;
+        player = PlayerManager.instance.player.transform;
     }
 
     public override void Exit()

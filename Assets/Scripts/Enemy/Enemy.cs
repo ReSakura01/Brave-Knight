@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Enemy : Entity
 {
-    public Transform player;
     [SerializeField] protected LayerMask whatIsPlayer;
 
     [Header("Move info")]
@@ -58,9 +57,7 @@ public class Enemy : Entity
     {
         isKnocked = true;
 
-        if (player == null) Debug.LogError("Enemy Component Player NULL");
-
-        float playerDir = -Mathf.Sign(player.localRotation.y);
+        float playerDir = -Mathf.Sign(PlayerManager.instance.player.transform.localRotation.y);
 
         rb.velocity = new Vector2(knockbackDirection.x * playerDir, knockbackDirection.y);
 

@@ -17,7 +17,7 @@ public class WanderingAttackState : EnemyState
     {
         base.Enter();
 
-        player = GameObject.Find("Blue").transform;
+        player = PlayerManager.instance.player.transform;
 
         if (player.position.x > enemy.transform.position.x)
             moveDir = 1;
