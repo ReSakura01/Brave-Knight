@@ -26,6 +26,12 @@ public class Player : Entity
 
     public bool fromWall = false;
 
+    [Header("Fireball info")]
+    public Vector2 fireballCastSpeed;
+
+    public SkillsManager skill {  get; private set; }
+    public GameObject fireball { get; private set; }
+
     #region State
     public PlayerStateMachine stateMachine { get; private set; }
     public PlayerIdleState idleState { get; private set; }
@@ -35,8 +41,8 @@ public class Player : Entity
     public PlayerWallSlideState wallSlideState { get; private set; }
     public PlayerDashState dashState { get; private set; }
     public PlayerWallJumpState wallJumpState { get; private set; }
-    
     public PlayerPrimaryAttackState primaryAttackState { get; private set; }
+    public PlayerFireballCastState fireballCastState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -53,11 +59,14 @@ public class Player : Entity
         wallSlideState = new PlayerWallSlideState(stateMachine, this, "WallSlide");
         wallJumpState = new PlayerWallJumpState(stateMachine, this, "DoubleJump");
         primaryAttackState = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
+        fireballCastState = new PlayerFireballCastState(stateMachine, this, "Fireball");
     }
 
     protected override void Start()
     {
         base.Start();
+
+        skill = SkillsManager.instance;
 
         stateMachine.Initialize(idleState);
     }
@@ -69,8 +78,10 @@ public class Player : Entity
         stateMachine.currentState.Update();
 
         CheckForDashInput();
+        CheckForFireballCastInput();
     }
 
+    #region EffectTrigger
     public virtual void OpenSlashEffect()
     {
         slashEffect1.SetActive(true);
@@ -92,6 +103,7 @@ public class Player : Entity
     {
         slashEffectAlt1.SetActive(false);
     }
+    #endregion
 
     public virtual void AnimationTrigger() => stateMachine.currentState.AnimationFinishTrigger();
 
@@ -101,7 +113,17 @@ public class Player : Entity
         yield return new WaitForSeconds(_seconds);
         isBusy = false;
     }
-    
+
+    #region SkillCheck
+    private void CheckForFireballCastInput()
+    {
+        if (Input.GetKeyDown(KeyCode.O))
+        {
+            if (isBusy) return;
+
+            stateMachine.ChangeState(fireballCastState);
+        }
+    }
 
     private void CheckForDashInput()
     {
@@ -121,6 +143,7 @@ public class Player : Entity
             stateMachine.ChangeState(dashState);
         }
     }
+    #endregion
 
     protected override void OnDrawGizmos()
     {

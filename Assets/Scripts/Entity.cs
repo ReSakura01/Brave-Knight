@@ -23,7 +23,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected LayerMask whatIsGround;
 
     public float facingDir { get; private set; } = -1;
-    protected bool facingRight = false;
+    public bool facingRight = false;
 
 
     protected virtual void Awake()  

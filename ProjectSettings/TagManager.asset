@@ -13,7 +13,7 @@ TagManager:
   - UI
   - Player
   - Enemy
-  - 
+  - Fireball
   - 
   - 
   - 
@@ -43,6 +43,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 1824015749
+    locked: 0
+  - name: Fireball
+    uniqueID: 4142967
     locked: 0
   - name: Ground
     uniqueID: 4136415673
