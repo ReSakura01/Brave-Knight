@@ -13,6 +13,7 @@ public class PlayerFireballCastState : PlayerState
     {
         base.Enter();
 
+        player.StartCoroutine(player.BusyFor(.4f));
         player.SetVelocity(player.fireballCastSpeed.x * -player.facingDir, player.fireballCastSpeed.y);
     }
 

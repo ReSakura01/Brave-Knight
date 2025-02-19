@@ -77,8 +77,11 @@ public class Player : Entity
 
         stateMachine.currentState.Update();
 
-        CheckForDashInput();
-        CheckForFireballCastInput();
+        if (!isBusy)
+        {
+            CheckForDashInput();
+            CheckForFireballCastInput();
+        }
     }
 
     #region EffectTrigger
@@ -119,8 +122,6 @@ public class Player : Entity
     {
         if (Input.GetKeyDown(KeyCode.O))
         {
-            if (isBusy) return;
-
             stateMachine.ChangeState(fireballCastState);
         }
     }
