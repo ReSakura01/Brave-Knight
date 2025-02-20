@@ -8,7 +8,6 @@ public class PlayerFireballCastState : PlayerState
     {
     }
 
-
     public override void Enter()
     {
         base.Enter();

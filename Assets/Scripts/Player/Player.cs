@@ -8,6 +8,9 @@ public class Player : Entity
     public Transform attacckCheck;
     public float attackCheckRadius;
     public GameObject slashEffect1, slashEffect2, slashEffectAlt1;
+    public float notAttackedDuration;
+    private float notAttackedTimer;
+    public float blinkInterval;
 
     public bool isBusy { get; private set; }
 
@@ -43,6 +46,7 @@ public class Player : Entity
     public PlayerWallJumpState wallJumpState { get; private set; }
     public PlayerPrimaryAttackState primaryAttackState { get; private set; }
     public PlayerFireballCastState fireballCastState { get; private set; }
+    public PlayerStunedState stunedState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -60,6 +64,7 @@ public class Player : Entity
         wallJumpState = new PlayerWallJumpState(stateMachine, this, "DoubleJump");
         primaryAttackState = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
         fireballCastState = new PlayerFireballCastState(stateMachine, this, "Fireball");
+        stunedState = new PlayerStunedState(stateMachine, this, "Stuned");
     }
 
     protected override void Start()
@@ -82,6 +87,40 @@ public class Player : Entity
             CheckForDashInput();
             CheckForFireballCastInput();
         }
+
+        notAttackedTimer -= Time.deltaTime;
+
+        CheckForSpike();
+    }
+
+    private IEnumerator BlinkEffect()
+    {
+        for (int i = 0; i < notAttackedDuration / (2 * blinkInterval); i++) // ÉÁË¸ 5 ´Î
+        {
+            sr.color = new Color(1f, 1f, 1f, 0.2f); // ±äÍ¸Ã÷
+            yield return new WaitForSeconds(blinkInterval);
+            sr.color = new Color(1f, 1f, 1f, 1f); // »Ö¸´
+            yield return new WaitForSeconds(blinkInterval);
+        }
+    }
+
+    protected virtual IEnumerator HitKnockback()
+    {
+        isKnocked = true;
+
+        rb.velocity = new Vector2(knockbackDirection.x * -facingDir, knockbackDirection.y);
+
+        yield return new WaitForSeconds(knockbackDuration);
+
+        isKnocked = false;
+    }
+
+    public override void Damage()
+    {
+        base.Damage();
+        StartCoroutine(BlinkEffect());
+        notAttackedTimer = notAttackedDuration;
+        stateMachine.ChangeState(stunedState);
     }
 
     #region EffectTrigger
@@ -144,6 +183,13 @@ public class Player : Entity
             stateMachine.ChangeState(dashState);
         }
     }
+
+    private void CheckForSpike()
+    {
+        if (IsSpikeDetected() && notAttackedTimer < 0)
+            Damage();
+    }
+
     #endregion
 
     protected override void OnDrawGizmos()

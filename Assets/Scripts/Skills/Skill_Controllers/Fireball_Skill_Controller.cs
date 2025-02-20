@@ -25,4 +25,9 @@ public class Fireball_Skill_Controller : MonoBehaviour
         rb.velocity = new Vector2(_force * playerfacing, 0);
 
     }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        other.GetComponent<Enemy>()?.Damage();
+    }
 }

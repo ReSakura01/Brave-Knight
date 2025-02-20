@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerFallState : PlayerAirState
+public class PlayerStunedState : PlayerState
 {
-    public PlayerFallState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(stateMachine, player, animBoolName)
+    public PlayerStunedState(PlayerStateMachine stateMachine, Player player, string animBoolName) : base(stateMachine, player, animBoolName)
     {
     }
 
@@ -22,7 +22,7 @@ public class PlayerFallState : PlayerAirState
     {
         base.Update();
 
-        if (player.IsGroundDetected() || player.IsSpikeDetected())
+        if (!player.isKnocked)
             stateMachine.ChangeState(player.idleState);
     }
 }

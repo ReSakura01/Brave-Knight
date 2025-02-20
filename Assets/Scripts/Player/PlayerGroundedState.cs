@@ -27,10 +27,10 @@ public class PlayerGroundedState : PlayerState
         if (Input.GetKeyDown(KeyCode.J))
             stateMachine.ChangeState(player.primaryAttackState);
 
-        if (!player.IsGroundDetected())
+        if (!player.IsGroundDetected() && !player.IsSpikeDetected())
             stateMachine.ChangeState(player.fallState);
 
-        if (Input.GetKeyDown(KeyCode.K) && player.IsGroundDetected() && !player.isDashing)
+        if (Input.GetKeyDown(KeyCode.K) && (player.IsGroundDetected() || player.IsSpikeDetected()) && !player.isDashing)
             stateMachine.ChangeState(player.jumpState);
     }
 }

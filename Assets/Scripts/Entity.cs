@@ -7,13 +7,13 @@ public class Entity : MonoBehaviour
     #region Component
     public Animator anim { get; private set; }
     public Rigidbody2D rb { get; private set; }
-
+    public SpriteRenderer sr { get; private set; }
     #endregion
 
     [Header("Knockback info")]
-    [SerializeField] protected Vector2 knockbackDirection;
-    [SerializeField] protected float knockbackDuration;
-    protected bool isKnocked;
+    [SerializeField] public Vector2 knockbackDirection;
+    [SerializeField] public float knockbackDuration;
+    public bool isKnocked;
 
     [Header("Collision info")]
     [SerializeField] protected Transform groundCheck;
@@ -21,6 +21,7 @@ public class Entity : MonoBehaviour
     [SerializeField] protected Transform wallCheck;
     [SerializeField] protected float wallCheckDistance;
     [SerializeField] protected LayerMask whatIsGround;
+    [SerializeField] protected LayerMask whatIsSpike;
 
     public float facingDir { get; private set; } = -1;
     public bool facingRight = false;
@@ -35,6 +36,7 @@ public class Entity : MonoBehaviour
     {
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
+        sr = GetComponentInChildren<SpriteRenderer>();
     }
 
     protected virtual void Update()
@@ -60,6 +62,7 @@ public class Entity : MonoBehaviour
     #region Collision
     public virtual bool IsGroundDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsGround);
     public virtual bool IsWallDetected() => Physics2D.Raycast(wallCheck.position, Vector2.right * facingDir, wallCheckDistance, whatIsGround);
+    public virtual bool IsSpikeDetected() => Physics2D.Raycast(groundCheck.position, Vector2.down, groundCheckDistance, whatIsSpike);
 
     protected virtual void OnDrawGizmos()
     {
