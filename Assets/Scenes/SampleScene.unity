@@ -166,6 +166,7 @@ GameObject:
   - component: {fileID: 242672289}
   - component: {fileID: 242672292}
   - component: {fileID: 242672291}
+  - component: {fileID: 242672293}
   m_Layer: 7
   m_Name: Enemy_Wandering
   m_TagString: Enemy
@@ -272,6 +273,25 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 1
   m_Constraints: 0
+--- !u!114 &242672293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 242672288}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa31d4bfc0f6984e815351daebc9801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    baseValue: 1
+    modifiers: 
+  maxHealth:
+    baseValue: 15
+    modifiers: 
+  currentHealth: 0
 --- !u!1 &275725292
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,6 +674,7 @@ GameObject:
   - component: {fileID: 642014434}
   - component: {fileID: 642014433}
   - component: {fileID: 642014432}
+  - component: {fileID: 642014436}
   m_Layer: 7
   m_Name: Enemy_Crawlid (1)
   m_TagString: Enemy
@@ -760,6 +781,25 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &642014436
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642014431}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa31d4bfc0f6984e815351daebc9801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    baseValue: 1
+    modifiers: 
+  maxHealth:
+    baseValue: 8
+    modifiers: 
+  currentHealth: 0
 --- !u!1 &648784544
 GameObject:
   m_ObjectHideFlags: 0
@@ -2840,6 +2880,7 @@ GameObject:
   - component: {fileID: 1234686070}
   - component: {fileID: 1234686072}
   - component: {fileID: 1234686073}
+  - component: {fileID: 1234686074}
   m_Layer: 6
   m_Name: Blue
   m_TagString: Player
@@ -2958,6 +2999,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.40352616, y: 0.8856133}
   m_EdgeRadius: 0
+--- !u!114 &1234686074
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1234686069}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa31d4bfc0f6984e815351daebc9801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    baseValue: 5
+    modifiers: 
+  maxHealth:
+    baseValue: 0
+    modifiers: 
+  currentHealth: 6
 --- !u!1 &1470854861
 GameObject:
   m_ObjectHideFlags: 0
@@ -3179,6 +3239,7 @@ GameObject:
   - component: {fileID: 1630315015}
   - component: {fileID: 1630315016}
   - component: {fileID: 1630315017}
+  - component: {fileID: 1630315018}
   m_Layer: 7
   m_Name: Enemy_Crawlid
   m_TagString: Enemy
@@ -3285,6 +3346,25 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.8322964, y: 0.4217083}
   m_EdgeRadius: 0
+--- !u!114 &1630315018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1630315013}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: faa31d4bfc0f6984e815351daebc9801, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage:
+    baseValue: 1
+    modifiers: 
+  maxHealth:
+    baseValue: 0
+    modifiers: 
+  currentHealth: 8
 --- !u!1 &1700656967
 GameObject:
   m_ObjectHideFlags: 3
