@@ -6,6 +6,10 @@ public class Enemy : Entity
 {
     [SerializeField] protected LayerMask whatIsPlayer;
 
+    [Header("Attack details")]
+    public Transform attacckCheck;
+    public float attackCheckRadius;
+
     [Header("Move info")]
     public float moveSpeed;
     public float idleTime;
@@ -52,6 +56,7 @@ public class Enemy : Entity
 
         Gizmos.color = Color.yellow;
         Gizmos.DrawLine(transform.position, new Vector3(transform.position.x + attackDistance * facingDir, transform.position.y));
+        Gizmos.DrawWireSphere(attacckCheck.position, attackCheckRadius);
     }
     protected virtual IEnumerator HitKnockback()
     {
@@ -65,4 +70,5 @@ public class Enemy : Entity
 
         isKnocked = false;
     }
+
 }

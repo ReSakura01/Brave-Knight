@@ -46,7 +46,7 @@ public class Entity : MonoBehaviour
 
     }
 
-    public virtual void Damage()
+    public virtual void DamageEffect()
     {
         StartCoroutine("HitKnockback");
 
@@ -89,4 +89,5 @@ public class Entity : MonoBehaviour
             Flip();
     }
     #endregion
+
 }

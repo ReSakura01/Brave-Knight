@@ -115,9 +115,9 @@ public class Player : Entity
         isKnocked = false;
     }
 
-    public override void Damage()
+    public override void DamageEffect()
     {
-        base.Damage();
+        base.DamageEffect();
         StartCoroutine(BlinkEffect());
         notAttackedTimer = notAttackedDuration;
         stateMachine.ChangeState(stunedState);
@@ -187,7 +187,7 @@ public class Player : Entity
     private void CheckForSpike()
     {
         if (IsSpikeDetected() && notAttackedTimer < 0)
-            Damage();
+            DamageEffect();
     }
 
     #endregion
