@@ -47,6 +47,7 @@ public class Player : Entity
     public PlayerPrimaryAttackState primaryAttackState { get; private set; }
     public PlayerFireballCastState fireballCastState { get; private set; }
     public PlayerStunedState stunedState { get; private set; }
+    public PlayerDeadState deadState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -65,6 +66,7 @@ public class Player : Entity
         primaryAttackState = new PlayerPrimaryAttackState(stateMachine, this, "Attack");
         fireballCastState = new PlayerFireballCastState(stateMachine, this, "Fireball");
         stunedState = new PlayerStunedState(stateMachine, this, "Stuned");
+        deadState = new PlayerDeadState(stateMachine, this, "Die");
     }
 
     protected override void Start()
@@ -95,7 +97,7 @@ public class Player : Entity
 
     private IEnumerator BlinkEffect()
     {
-        for (int i = 0; i < notAttackedDuration / (2 * blinkInterval); i++) // 闪烁 5 次
+        for (int i = 0; i < notAttackedDuration / (2 * blinkInterval); i ++) // 闪烁 5 次
         {
             sr.color = new Color(1f, 1f, 1f, 0.2f); // 变透明
             yield return new WaitForSeconds(blinkInterval);
@@ -118,6 +120,9 @@ public class Player : Entity
     public override void DamageEffect()
     {
         base.DamageEffect();
+
+        if (stats.currentHealth <= 0) return;
+
         StartCoroutine(BlinkEffect());
         notAttackedTimer = notAttackedDuration;
         stateMachine.ChangeState(stunedState);
@@ -197,5 +202,12 @@ public class Player : Entity
         base.OnDrawGizmos();
 
         Gizmos.DrawWireSphere(attacckCheck.position, attackCheckRadius);
+    }
+
+    public override void Die()
+    {
+        base.Die();
+
+        stateMachine.ChangeState(deadState);
     }
 }

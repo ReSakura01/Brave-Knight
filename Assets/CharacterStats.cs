@@ -9,7 +9,7 @@ public class CharacterStats : MonoBehaviour
     public Stat damage;
     public Stat maxHealth;
 
-    [SerializeField] private int currentHealth;
+    public int currentHealth;
 
     // Start is called before the first frame update
     protected virtual void Start()
@@ -28,12 +28,12 @@ public class CharacterStats : MonoBehaviour
     {
         currentHealth -= _damage;
 
-        if (currentHealth < 0)
+        if (currentHealth <= 0)
             Die();
     }
 
     protected virtual void Die()
     {
-        throw new NotImplementedException();
+
     }
 }

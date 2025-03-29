@@ -9,6 +9,7 @@ public class Entity : MonoBehaviour
     public Rigidbody2D rb { get; private set; }
     public SpriteRenderer sr { get; private set; }
     public CharacterStats stats { get; private set; }
+    public BoxCollider2D cd { get; private set; }
     #endregion
 
     [Header("Knockback info")]
@@ -39,6 +40,7 @@ public class Entity : MonoBehaviour
         anim = GetComponentInChildren<Animator>();
         rb = GetComponent<Rigidbody2D>();
         stats = GetComponent<CharacterStats>();
+        cd = GetComponent<BoxCollider2D>();
     }
 
     protected virtual void Update()
@@ -90,4 +92,8 @@ public class Entity : MonoBehaviour
     }
     #endregion
 
+    public virtual void Die()
+    {
+
+    }
 }

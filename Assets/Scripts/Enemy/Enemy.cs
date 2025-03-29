@@ -22,6 +22,7 @@ public class Enemy : Entity
     public bool canBeCountered;
 
     public EnemyStateMachine stateMachine { get; private set; }
+    public string lastAnimBoolName { get; private set; }
 
     protected override void Awake()
     {
@@ -34,6 +35,11 @@ public class Enemy : Entity
         base.Update();
 
         stateMachine.currentState.Update();
+    }
+
+    public virtual void AssignLastAnimName(string name)
+    {
+        lastAnimBoolName = name;
     }
 
     public virtual void OpenCounterAttackWindow()
