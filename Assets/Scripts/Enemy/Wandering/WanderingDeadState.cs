@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CrawlidDeadState : EnemyState
+public class WanderingDeadState : EnemyState
 {
-    protected Enemy_Crawlid enemy;
-    public CrawlidDeadState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName) : base(stateMachine, enemyBase, animBoolName)
+    protected Enemy_Wandering enemy;
+    public WanderingDeadState(EnemyStateMachine stateMachine, Enemy enemyBase, string animBoolName) : base(stateMachine, enemyBase, animBoolName)
     {
-        enemy = enemyBase as Enemy_Crawlid;
+        enemy = enemyBase as Enemy_Wandering;
     }
 
     public override void AnimationFinishTrigger()
