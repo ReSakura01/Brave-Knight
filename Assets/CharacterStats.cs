@@ -20,13 +20,15 @@ public class CharacterStats : MonoBehaviour
     public Stat armor;
     public Stat evasion;
 
-    [SerializeField] public int currentHealth;
+    public int currentHealth;
+
+    public System.Action onHealthChanged;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         critPower.SetDefaultValue(150);
-        currentHealth = maxHealth.GetValue();
+        currentHealth = GetMaxHealthValue();
     }
 
     public virtual void DoDamage(CharacterStats _targeStat)
@@ -49,11 +51,20 @@ public class CharacterStats : MonoBehaviour
 
     public virtual void TakeDamage(int _damage)
     {
-        currentHealth -= _damage;
+        DecreaseHealthBy(_damage);
 
         if (currentHealth <= 0)
             Die();
     }
+
+    protected virtual void DecreaseHealthBy(int _damage)
+    {
+        currentHealth -= _damage;
+
+        if (onHealthChanged != null)
+            onHealthChanged();
+    }
+
 
     protected virtual void Die()
     {
@@ -96,5 +107,10 @@ public class CharacterStats : MonoBehaviour
         float critDamage = _damage * totalCritPower;
 
         return Mathf.RoundToInt(critDamage);
+    }
+
+    public int GetMaxHealthValue()
+    {
+        return maxHealth.GetValue() + vitality.GetValue();
     }
 }

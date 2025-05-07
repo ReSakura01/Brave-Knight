@@ -28,6 +28,8 @@ public class Entity : MonoBehaviour
     public float facingDir { get; private set; } = -1;
     public bool facingRight = false;
 
+    public System.Action onFlipped;
+
 
     protected virtual void Awake()  
     {
@@ -81,6 +83,9 @@ public class Entity : MonoBehaviour
         facingDir = facingDir * -1;
         facingRight = !facingRight;
         transform.Rotate(0, 180, 0);
+
+        if (onFlipped != null)
+            onFlipped();
     }
 
     public virtual void FlipController(float _x)
