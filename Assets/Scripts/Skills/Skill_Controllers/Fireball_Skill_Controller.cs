@@ -28,6 +28,12 @@ public class Fireball_Skill_Controller : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        other.GetComponent<Enemy>()?.DamageEffect();
+        if (other.GetComponent<Enemy>() != null)
+        {
+            EnemyStats enemy = other.GetComponent<EnemyStats>();
+
+            PlayerManager.instance.player.stats.DoDamage(enemy);
+        }
+        
     }
 }
