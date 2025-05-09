@@ -29,7 +29,12 @@ public class PlayerAnimationTriggers : MonoBehaviour
     private void FireballCast()
     {
         SkillsManager.instance.fireball.CreateFireball();
-    }   
+    }
+
+    private void Shriek()
+    {
+        SkillsManager.instance.shriek.CreateShriek();
+    }
     private void OpenSlashEffect() => player.OpenSlashEffect();
     private void CloseSlashEffect() => player.CloseSlashEffect();
 

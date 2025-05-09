@@ -7,6 +7,7 @@ public class SkillsManager : MonoBehaviour
     public static SkillsManager instance {  get; private set; }
 
     public Fireball_Skill fireball {  get; private set; }
+    public Shriek_Skill shriek { get; private set; }
 
     private void Awake()
     {
@@ -19,5 +20,6 @@ public class SkillsManager : MonoBehaviour
     private void Start()
     {
         fireball = GetComponent<Fireball_Skill>();
+        shriek = GetComponent<Shriek_Skill>();
     }
 }

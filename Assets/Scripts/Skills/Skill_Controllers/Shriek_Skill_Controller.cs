@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Shriek_Skill_Controller : MonoBehaviour
+{
+    private Animator anim;
+    private Rigidbody2D rb;
+
+    private void Awake()
+    {
+        anim = GetComponentInChildren<Animator>();
+        rb = GetComponent<Rigidbody2D>();
+    }
+
+    public void SetupShriek()
+    {
+        rb.velocity = new Vector2(0, 0);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (other.GetComponent<Enemy>() != null)
+        {
+            EnemyStats enemy = other.GetComponent<EnemyStats>();
+
+            PlayerManager.instance.player.stats.DoDamage(enemy);
+        }
+
+    }
+}

@@ -48,6 +48,8 @@ public class Player : Entity
     public PlayerFireballCastState fireballCastState { get; private set; }
     public PlayerStunedState stunedState { get; private set; }
     public PlayerDeadState deadState { get; private set; }
+    
+    public PlayerShriekState shriekState { get; private set; }
     #endregion
 
     protected override void Awake()
@@ -67,6 +69,7 @@ public class Player : Entity
         fireballCastState = new PlayerFireballCastState(stateMachine, this, "Fireball");
         stunedState = new PlayerStunedState(stateMachine, this, "Stuned");
         deadState = new PlayerDeadState(stateMachine, this, "Die");
+        shriekState = new PlayerShriekState(stateMachine, this, "Shriek");
     }
 
     protected override void Start()
@@ -88,6 +91,7 @@ public class Player : Entity
         {
             CheckForDashInput();
             CheckForFireballCastInput();
+            CheckForShriekInput();
         }
 
         notAttackedTimer -= Time.deltaTime;
@@ -128,7 +132,7 @@ public class Player : Entity
         stateMachine.ChangeState(stunedState);
     }
 
-    #region EffectTrigger
+    #region SlashEffectTrigger
     public virtual void OpenSlashEffect()
     {
         slashEffect1.SetActive(true);
@@ -162,6 +166,13 @@ public class Player : Entity
     }
 
     #region SkillCheck
+    private void CheckForShriekInput()
+    {
+        if (Input.GetKey(KeyCode.W) && Input.GetKeyDown(KeyCode.Space))
+        {
+            stateMachine.ChangeState(shriekState);
+        }
+    }
     private void CheckForFireballCastInput()
     {
         if (Input.GetKeyDown(KeyCode.O))
