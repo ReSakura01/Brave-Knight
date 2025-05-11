@@ -6,6 +6,10 @@ public class Enemy : Entity
 {
     [SerializeField] protected LayerMask whatIsPlayer;
 
+    [SerializeField] private GameObject geoPrefab;       // 拖入你的 Geo 预制体
+    [SerializeField] private int geoDropCount = 5;       // 生成几个 Geo
+    [SerializeField] private float spawnForce = 5f;      // 发射力度
+
     [Header("Attack details")]
     public Transform attacckCheck;
     public float attackCheckRadius;
@@ -35,6 +39,22 @@ public class Enemy : Entity
         base.Update();
 
         stateMachine.currentState.Update();
+    }
+
+    private void SpawnGeo()
+    {
+        for (int i = 0; i < geoDropCount; i++)
+        {
+            GameObject geo = Instantiate(geoPrefab, transform.position, Quaternion.identity);
+
+            // 发射一个随机方向的力（2D）
+            Rigidbody2D rb = geo.GetComponent<Rigidbody2D>();
+            if (rb != null)
+            {
+                Vector2 forceDir = (Vector2.up + Random.insideUnitCircle * 0.5f).normalized;
+                rb.AddForce(forceDir * spawnForce, ForceMode2D.Impulse);
+            }
+        }
     }
 
     public virtual void AssignLastAnimName(string name)
@@ -77,4 +97,10 @@ public class Enemy : Entity
         isKnocked = false;
     }
 
+    public override void Die()
+    {
+        base.Die();
+
+        SpawnGeo();
+    }
 }
